@@ -615,7 +615,7 @@ function displayIcon(iconName, msg, video) {
 }
 
 function doMute(e, vid) { 
-  if ( e.button == 1 ) {
+  if ( e.button == 1 && mvObject.mute_middle_mouse) {
     e.preventDefault();
     vid.muted = !vid.muted 
     vid.muted == true ? displayIcon("vol_mute", "", vid) :  displayIcon("vol_sound", "", vid)
