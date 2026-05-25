@@ -547,6 +547,23 @@ function wheel(e, vid) {
   // Skip only
   } else if (mvObject.mode === "mode_seek_only") {    
     seekVideoByAreas(cX, delta, vid);
+  
+  // Seek and playrate only
+  } else if (mvObject.mode === "mode_seek_with_playrate_only") {    
+    // top half
+    if (e.offsetY <= vid.clientHeight / 2) {
+      if (cX < vid.clientWidth - (50/ 100) * vid.clientWidth) {
+        changeVolume(delta, vid);
+
+      } else {  
+        changePlaybackRate(delta, vid);
+      }
+
+    // bottom half
+    } 
+    else { 
+      seekVideoByAreas(cX, delta, vid);
+    }
 
   // Volume only
   } else if (mvObject.mode === "mode_volume") {
@@ -555,7 +572,7 @@ function wheel(e, vid) {
   // Default to Everything mode (volume, seek)
   } else {
 
-    // bottom half
+    // top half
     if (e.offsetY <= vid.clientHeight / 2) {
       if (cX < vid.clientWidth - (75 / 100) * vid.clientWidth) {
         controlPopoutEvent({delta, vid, e})
@@ -566,7 +583,7 @@ function wheel(e, vid) {
         changeVolume(delta, vid);
       }
 
-    // top half
+    // bottom half
     } 
     else { 
       seekVideoByAreas(cX, delta, vid);
